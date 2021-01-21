@@ -1,0 +1,70 @@
+<div clas="row">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6 offset-xl-3 offset-md-1 offset-lg-2">
+
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="text-center border border-light p-5">
+
+            <p class="h4 mb-4">New Product</p>
+
+            <input type="text" id="Name" formControlName="name" class="form-control mb-4" placeholder="Name">
+
+            <input type="text" id="Manufacturer" formControlName="brand" class="form-control mb-4" placeholder="brand">
+
+            <input type="text" id="imagePath" formControlName="imagePath" class="form-control mb-4"
+                placeholder="Image Path" #imgPath>
+
+            <img [src]="imgPath.value" style="width: 100%;">
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy/mm/dd" formControlName="released">
+                </div>
+            </div>
+
+            <input type="text" id="OS" formControlName="oS" class="form-control mb-4" placeholder="OS">
+
+            <input type="text" id="battery" formControlName="battery" class="form-control mb-4" placeholder="Battery">
+
+            <input type="text" id="Display" formControlName="display" class="form-control mb-4" placeholder="Display">
+
+            <input type="text" id="Camera" formControlName="camera" class="form-control mb-4" placeholder="Camera">
+
+            <input type="text" id="Storage" formControlName="storage" class="form-control mb-4" placeholder="Storage">
+
+            <input type="text" id="Hardware" formControlName="hardware" class="form-control mb-4"
+                placeholder="Hardware">
+
+            <input type="text" id="Price" formControlName="price" class="form-control mb-4" placeholder="Price">
+
+            <label>Type</label>
+            <select class="browser-default custom-select mb-4" formControlName="type">
+                <option value="Phone" selected>Phone</option>
+                <option value="Labtop">Labtop</option>
+                <option value="Camera">Camera</option>
+                <option value="Tablet">Tablet</option>
+            </select>
+
+            <label>Highlight</label>
+            <select class="browser-default custom-select mb-4" formControlName="highlight">
+                <option value="None" selected>None</option>
+                <option value="BestSeller">BestSeller</option>
+                <option value="Featured">Featured</option>
+                <option value="New">New</option>
+            </select>
+
+            <div class="form-group">
+                <textarea class="form-control rounded-0" name="description" formControlName="description"
+                    id="Description" rows="3" placeholder="Description"></textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 mx-auto d-flex">
+                    <mdb-checkbox [default]="true" class="mb-4" formControlName="available">Available</mdb-checkbox>
+                </div>
+            </div>
+            <!-- Save button -->
+            <button mdbBtn color="info" block="true" type="submit">Save</button>
+
+        </form>
+        <!-- Default form contact -->
+    </div>
+</div>

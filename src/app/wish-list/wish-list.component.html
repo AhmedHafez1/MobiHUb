@@ -1,0 +1,113 @@
+<div *ngIf="wishList.length === 0" style="background:rgb(224, 245, 243); height: 94vh; margin-top: -5px;text-align: center; padding-top: 50px;">
+    <h3 style="color: indigo; margin-bottom: 50px;">Your WishList is Empty</h3>
+    <div>
+        <button mdbBtn style="font-weight: bold;" color="indigo" outline="true" mdbWavesEffect type="button" class="m-0"
+            [routerLink]="['/products/all-products']">Continue Shopping</button>
+    </div>
+</div>
+
+<div *ngIf="wishList.length > 0">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 offset-lg-2 offset-md-1" style="margin-top: 25px;">
+
+            <mdb-card cascade="true" narrower="true">
+                <!--Card header-->
+                <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+                    <h5 style="color: white;">Your Wish List <mdb-icon fas icon="heart">
+                        </mdb-icon>
+                    </h5>
+
+                </div>
+                <!--/Card header-->
+                <div class="px-4">
+
+                    <div class="table-wrapper table-responsive">
+                        <!--Table-->
+                        <table class="table btn-table" mdbTable>
+
+                            <!--Table head-->
+                            <thead>
+                                <tr>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Product
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Name
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Price
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                                <tr *ngFor="let product of wishList; let i = index;">
+                                    <td>
+                                        <img [src]="product.imagePath" [alt]="product.name" style="height: 70px;" />
+                                    </td>
+                                    <td style="font-weight: bold;">
+                                        {{product.name}}
+                                    </td>
+                                    <td style="font-weight: bold;">
+                                        {{product.price}}
+                                    </td>
+                                    <td class="text-white font-weight-bold">
+                                        <a mdbBtn color="red" floating="true" size="sm" type="button" mdbWavesEffect class="ml-3"
+                                            (click)="onRemoveItem(i)">X</a>
+                                    </td>
+                                    <ng-template #templateCart>
+                                        <div class="modal-header">
+                                            <h5 class="modal-title pull-left">ONE ITEM HAS BEEN ADDED TO CART !</h5>
+                                            <button type="button" class="close pull-right" aria-label="Close"
+                                                (click)="modalRef.hide()">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <p></p>
+                                                    <p class="text-center">
+                                                        <img [src]="product.imagePath" alt="" class="img-fluid">
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-9">
+                                                    <h5>{{product.name}}</h5>
+                                                    <h5><strong> $ {{product.price}}</strong></h5>
+                                                    <p>Would you like to proceed to your cart and checkout or to
+                                                        continue Shopping?</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--Footer-->
+                                        <div class="modal-footer justify-content-center">
+
+                                            <a type="button" mdbBtn color="success" outline="true" class="waves-effect"
+                                                mdbWavesEffect (click)="modalRef.hide()" data-dismiss="modal">Continue
+                                                Shopping</a>
+                                            <a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect
+                                                (click)="modalRef.hide()" [routerLink]="['/cart']">View Cart &
+                                                Checkout</a>
+                                        </div>
+                                    </ng-template>
+                                </tr>
+
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+                        <!--Table-->
+                    </div>
+                </div>
+
+            </mdb-card>
+        </div>
+    </div>
+</div>

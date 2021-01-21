@@ -1,0 +1,53 @@
+<div style="margin-bottom: 25px;">
+    <mdb-card cascade="true" narrower="true">
+        <!--Card header-->
+        <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+            <h6 style="color: white;">Payment</h6>
+
+        </div>
+        <!--/Card header-->
+
+        <div class="row">
+            <div class="col-md-8 col-10 offset-md-2 offset-1">
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="cardNumber" class="form-control" name="cardNumber"
+                            ngModel required maxlength="16" minlength="16" pattern="^[1-9]+[0-9]*$"
+                            #cardNumber="ngModel" />
+                        <label for="cardNumber">Card Number</label>
+                    </div>
+
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="fullName" class="form-control" name="fullName"
+                            ngModel required maxlength="30" #monthYear="ngModel" />
+                        <label for="fullName">Full Name</label>
+                    </div>
+
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="monthYear" class="form-control" name="monthYear"
+                            ngModel required maxlength="4" minlength="4" #fullName="ngModel" required
+                            pattern="^[1-9]+[0-9]*$" />
+                        <label for="monthYear">Valid Until</label>
+                    </div>
+
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="cVV" class="form-control" name="cVV" ngModel
+                            required maxlength="4" minlength="4" #cVV="ngModel" required pattern="^[1-9]+[0-9]*$" />
+                        <label for="cVV">CVV</label>
+                    </div>
+
+                    <div style="margin-top: 40px; margin-bottom: 25px;">
+                        <button mdbBtn color="teal" mdbWavesEffect type="submit" class="m-0" [disabled]="!f.valid"
+                            style="width:100%">Submit Order</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </mdb-card>
+</div>

@@ -1,0 +1,240 @@
+<div class="spinner" *ngIf="isLoading">
+  <div class="spinner-border"  role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!isLoading">
+  <h2 class="h1-responsive font-weight-bold text-center my-4">New Arrivals</h2>
+
+  <mdb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+
+    <mdb-carousel-item>
+      <a [routerLink]="['/products', latestProducts[2].id]" style="cursor: pointer;">
+        <div class="view w-100 text-center">
+          <img class="d-block w-100" src="../../assets/Cover/oneplus8.jpg" alt="{{latestProducts[2].name}}">
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+        </div>
+
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">{{latestProducts[2].name}}</h3>
+          <p>{{latestProducts[2].brand}}</p>
+        </div>
+      </a>
+    </mdb-carousel-item>
+
+    <mdb-carousel-item>
+      <a [routerLink]="['/products', latestProducts[1].id]" style="cursor: pointer;">
+        <div class="view w-100 text-center">
+          <img class="d-block w-100" src="../../assets/Cover/macbook-pro.jpg" alt="{{latestProducts[1].name}}">
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">{{latestProducts[1].name}}</h3>
+          <p>{{latestProducts[1].brand}}</p>
+        </div>
+      </a>
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <a [routerLink]="['/products', latestProducts[0].id]" style="cursor: pointer;">
+        <div class="view w-100 text-center">
+          <img class="d-block w-100" src="../../assets/Cover/iphone-11-pro-og-facebook-201909.jfif"
+            alt="{{latestProducts[0].name}}">
+          <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+        </div>
+        <div class="carousel-caption">
+          <h3 class="h3-responsive">{{latestProducts[0].name}}</h3>
+          <p>{{latestProducts[0].brand}}</p>
+        </div>
+      </a>
+    </mdb-carousel-item>
+  </mdb-carousel>
+
+
+
+  <!--Section: Magazine v.1-->
+  <section class="magazine-section">
+
+    <!-- Section heading -->
+    <h2 class="h1-responsive font-weight-bold text-center  mt-5">Hot Products</h2>
+    <!-- Section description -->
+    <p class="text-center dark-grey-text w-responsive mx-auto mb-3">Some of bestseller & most popular Phones, Labtops &
+      Tablets recommended for you ..</p>
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-lg-6 col-md-12">
+
+        <!-- Featured news -->
+        <div class="single-news mb-4">
+
+          <!-- Image -->
+          <div class="view overlay rounded z-depth-1-half mb-4">
+            <img class="img-fluid" src="../../assets/Cover/asus-zenbook-nx500-laptop-topthin-1500x1000.jpg"
+              alt="Sample image">
+            <a [routerLink]="['/products', topPopular[0].id]" style="cursor: pointer;">
+              <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
+            </a>
+          </div>
+
+          <!-- Data -->
+          <div class="news-data d-flex justify-content-between">
+            <a [routerLink]="['/products', topPopular[0].id]" style="cursor: pointer;" class="light-blue-text">
+              <h6 class="font-weight-bold">
+                <mdb-icon fas icon="dollar-sign" class="pr-1"></mdb-icon>{{topPopular[0].price | number:
+                '1.1-1'}}
+              </h6>
+            </a>
+            <a [routerLink]="['/products', topPopular[0].id]" style="cursor: pointer;">
+              <p class="font-weight-bold dark-grey-text">
+                {{topPopular[0].name}}
+              </p>
+            </a>
+          </div>
+          <h3 class="font-weight-bold dark-grey-text mb-3">
+            <a>Best Seller</a>
+          </h3>
+          <!-- Excerpt -->
+
+          <p class="dark-grey-text">Some of the best seller products with a very fantastic features recomended for
+            you based on the high number of sold items.</p>
+
+        </div>
+        <!-- Featured news -->
+
+        <!-- Small news -->
+        <div class="single-news mb-4" *ngFor="let best of popularProducts;let i=index">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-3">
+
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1 mb-4 text-center">
+                <img class="img-fluid" [src]="popPhotos[i]" alt="Sample image" style="max-height: 350px;">
+                <a [routerLink]="['/products',best.id]">
+                  <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
+                </a>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+
+              <!-- Excerpt -->
+              <a [routerLink]="['/products',best.id]">
+                <p class="font-weight-bold dark-grey-text">{{best.name}}</p>
+              </a>
+              <div class="d-flex justify-content-between">
+                <div class="col-11 text-truncate pl-0 mb-3">
+                  <a [routerLink]="['/products',best.id]" class="dark-grey-text">{{best.description}}</a>
+                </div>
+                <a [routerLink]="['/products',best.id]">
+                  <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                </a>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12">
+        <!-- Small news -->
+        <!-- Featured news -->
+        <div class="single-news mb-4">
+
+          <!-- Image -->
+          <div class="view overlay rounded z-depth-1-half mb-4">
+            <img class="img-fluid" src="../../assets/Cover/tablet002.jpg" alt="Sample image">
+            <a [routerLink]="['/products', topFeatured[0].id]" style="cursor: pointer;">
+              <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
+            </a>
+          </div>
+
+          <!-- Data -->
+          <div class="news-data d-flex justify-content-between">
+            <a [routerLink]="['/products', topFeatured[0].id]" style="cursor: pointer;" class="light-blue-text">
+              <h6 class="font-weight-bold">
+                <mdb-icon fas icon="dollar-sign" class="pr-1"></mdb-icon>{{topFeatured[0].price | number:
+                '1.1-1'}}
+              </h6>
+            </a>
+            <a [routerLink]="['/products', topFeatured[0].id]" style="cursor: pointer;">
+              <p class="font-weight-bold dark-grey-text">
+                {{topFeatured[0].name}}
+              </p>
+            </a>
+          </div>
+
+          <h3 class="font-weight-bold dark-grey-text mb-3">
+            <a>Featured For You</a>
+          </h3>
+          <!-- Excerpt -->
+
+          <p class="dark-grey-text">Some of the featured products for you with a very nice specifications
+            selected for you ..</p>
+
+        </div>
+        <!-- Featured news -->
+
+        <!-- Small news -->
+        <div class="single-news mb-4" *ngFor="let featured of featuredProducts;let i=index">
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-3">
+
+              <!--Image-->
+              <div class="view overlay rounded z-depth-1 mb-4 text-center">
+                <img class="img-fluid" [src]="featuredPhotos[i]" alt="Sample image" style="max-height: 350px;">
+                <a [routerLink]="['/products',featured.id]">
+                  <div class="mask rgba-white-slight waves-light" mdbWavesEffect></div>
+                </a>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-9">
+
+              <!-- Excerpt -->
+              <a [routerLink]="['/products',featured.id]">
+                <p class="font-weight-bold dark-grey-text">{{featured.name}}</p>
+              </a>
+              <div class="d-flex justify-content-between">
+                <div class="col-11 text-truncate pl-0 mb-3">
+                  <a [routerLink]="['/products',featured.id]" class="dark-grey-text">{{featured.description}}</a>
+                </div>
+                <a [routerLink]="['/products',featured.id]">
+                  <mdb-icon fas icon="angle-double-right"></mdb-icon>
+                </a>
+              </div>
+
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+        </div>
+        <!-- Small news -->
+      </div>
+    </div>
+    <!-- Grid row -->
+
+  </section>
+
+</div>

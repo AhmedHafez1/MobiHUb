@@ -1,0 +1,187 @@
+<div *ngIf="cartProducts.length === 0"
+    style="background: rgb(224, 245, 243); height: 94vh; margin-top: -5px;text-align: center; padding-top: 50px;">
+    <h3 style="color: indigo; margin-bottom: 50px;">Your Cart is Empty</h3>
+    <div>
+        <button mdbBtn style="font-weight: bold;" color="indigo" outline="true" mdbWavesEffect type="button" class="m-0"
+            [routerLink]="['/products/all-products']">Continue Shopping</button>
+    </div>
+
+    <img class="back" src="../../assets/shopping_cart.png" alt="shopping cart" style="margin-top: 50px;">
+</div>
+
+<div *ngIf="cartProducts.length > 0">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 mt-4">
+
+            <mdb-card cascade="true" narrower="true">
+                <!--Card header-->
+                <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+                    <h5 style="color: white;">Your Cart <mdb-icon fas icon="shopping-cart" style="color: white;">
+                        </mdb-icon>
+                    </h5>
+
+                </div>
+                <!--/Card header-->
+
+                <div class="px-4">
+
+                    <div class="table-wrapper">
+                        <!--Table-->
+                        <table class="table table-responsive-md btn-table" mdbTable>
+
+                            <!--Table head-->
+                            <thead>
+                                <tr>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Product
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Name
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Unit
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        QTY
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Price
+                                    </th>
+                                    <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                                <tr *ngFor="let product of cartProducts; let i = index;">
+                                    <td>
+                                        <img [src]="product.imagePath" [alt]="product.name" style="height: 70px;" />
+                                    </td>
+                                    <td style="font-weight: bold;">
+                                        {{product.name}}
+                                    </td>
+                                    <td style="font-weight: bold;">
+                                        {{product.price}}
+                                    </td>
+                                    <td>
+                                        <select class="browser-default custom-select" style="height: 35px; width: 50px;"
+                                            [(ngModel)]="quantities[i]" (change)="calculatePrice()">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </td>
+                                    <td style="font-weight: bold; font-size: large; color: black;">
+                                        {{product.price * quantities[i] | number:'1.2'}}
+                                    </td>
+                                    <td class="text-white font-weight-bold">
+                                        &nbsp;&nbsp;
+                                        <a mdbBtn color="red" floating="true" size="sm" type="button" mdbWavesEffect
+                                            (click)="onRemoveItem(i)">X</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+                        <!--Table-->
+                    </div>
+                </div>
+                <div class="px-4 text-center" style="margin-bottom: 10px; margin-top: 10px;">
+                    <h6>
+                        <mdb-badge info="true" class="badge-2">Cart Price</mdb-badge>
+                        <strong>
+                            <mdb-badge default="true" class="badge-1">$ {{this.cartPrice | number:'1.2'}}</mdb-badge>
+                        </strong>
+                    </h6>
+                </div>
+            </mdb-card>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12 mt-4">
+            <mdb-card cascade="true" narrower="true" style="height: 276px;">
+                <!--Card header-->
+                <div class="gradient-card-header blue-gradient py-2 mx-4 mb-4 text-center">
+
+                    <h5 style="color: white;">Shipping <mdb-icon fas icon="shipping-fast"></mdb-icon>
+                    </h5>
+
+                </div>
+                <!--/Card header-->
+                <p class="text-center font-weight-bold" style="color: rgb(19, 78, 146);">Select Your Preferred Shipping
+                    Type</p>
+                <form [formGroup]="shippingForm" style="font-size: small; margin-left: 40px;">
+                    <div class="form-check">
+                        <label><input type="radio" class="form-check-input" formControlName="shippingType"
+                                name="shippingType" value="standard"> Standard (Delivery within 7 days)</label>
+                    </div>
+                    <div class="form-check">
+                        <label><input type="radio" class="form-check-input" formControlName="shippingType"
+                                name="shippingType" value="expedited"> Expedited (Delivery within 3 days)</label>
+                    </div>
+                    <div class="form-check">
+                        <label><input type="radio" class="form-check-input" formControlName="shippingType"
+                                name="shippingType" value="urgent"> Same Day (Delivery within 24 hours)</label>
+                    </div>
+                </form>
+                <div class="px-4 text-center mb-4 mt-3">
+                    <h6>
+                        <mdb-badge info="true" class="badge-2">Shipping Cost</mdb-badge>
+                        <strong>
+                            <mdb-badge default="true" class="badge-1">$ {{this.shippingCost}}</mdb-badge>
+                        </strong>
+                    </h6>
+                </div>
+            </mdb-card>
+        </div>
+        <div class="col-lg-6 col-md-12 mb-4 mt-4">
+            <mdb-card cascade="true" narrower="true">
+                <!--Card header-->
+                <div class="gradient-card-header morpheus-den-gradient py-2 mx-4 mb-3 text-center">
+
+                    <h4 style="color: white;">Total Price <mdb-icon fas icon="dollar-sign"></mdb-icon>
+                    </h4>
+
+                </div>
+                <!--/Card header-->
+
+                <div class="px-4 text-center" style="margin-top: 10px; margin-bottom: 15px;">
+                    <h4>
+                        <strong>
+                            <mdb-badge color="indigo badge-3" style="font-size: larger;">$ {{this.totalPrice |
+                                number:'1.2'}}</mdb-badge>
+                        </strong>
+                    </h4>
+                </div>
+
+            </mdb-card>
+
+            <div class="mt-3">
+                <div>
+                    <button mdbBtn color="teal" outline="true" mdbWavesEffect type="button" [routerLink]="['/']"
+                        style="width:100%">Continue Shopping</button>
+                </div>
+                <div>
+                    <button mdbBtn color="teal" mdbWavesEffect type="button" [routerLink]="['/check-out/shipping']"
+                        (click)="proceedToPay(cartPrice, shippingCost)" style="width:100%;">Complete
+                        Checkout</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

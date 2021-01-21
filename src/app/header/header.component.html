@@ -1,0 +1,75 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark indigo ie-nav fixed-top" [containerInside]="false">
+    <mdb-navbar-brand>
+        <a class="logo navbar-brand font-weight-bold" [routerLink]="['/']">MubiHUb</a>
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['/products/all-products']">All Products</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['/products/phones']">Phones</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['/products/labtops']">Labtops</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['products/tablets']">Tablets</a>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Brands<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Samsung')">Samsung</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Lenovo')">Lenovo</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Apple')">Apple</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Google')">Google</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Oppo')">Oppo</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('OnePlus')">OnePlus</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('ASUS')">ASUS</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Microsoft')">Microsoft</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('LG')">LG</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="getBrand('Acer')">Acer</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Manage Products<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)=" onSaveProducts()">Save Products</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect (click)="onFetchProducts()">Fetch Products</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/products/new']"
+                        routerLinkActive="router-link-active">Add Product</a>
+                </div>
+            </li> -->
+        </ul>
+        <ul class="navbar-nav nav-flex-icons">
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link navbar-link-2 waves-effect" [routerLink]="['/cart']">
+                    <span class="badge badge-pill red" *ngIf="cartProducts.length > 0">{{cartProducts.length}}</span>
+                    <i class="fas fa-shopping-cart pl-0"></i>
+                </a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link navbar-link-2 waves-effect" [routerLink]="['/wish-list']">
+                    <span class="badge badge-pill red" *ngIf="wishList.length > 0">{{wishList.length}}</span>
+                    <i class="fas fa-heart pl-0"></i>
+                </a>
+            </li>
+            <div>
+                <form (ngSubmit)="onSubmit()" [formGroup]="searchForm"
+                    class="form-inline waves-light waves-light ml-auto" mdbWavesEffect>
+                    <div class="md-form my-0">
+                        <input class="form-control mr-sm-2" formControlName="search" type="text" placeholder="Search"
+                            aria-label="Search">
+                    </div>
+                </form>
+            </div>
+        </ul>
+    </links>
+</mdb-navbar>

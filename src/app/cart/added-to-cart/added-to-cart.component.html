@@ -1,0 +1,52 @@
+<app-show-hide-frame (showFrame)="frame.show()" (hideFrame)="frame.hide()" *ngIf="viewMessage"></app-show-hide-frame>
+
+<!-- Added to Cart Message -->
+
+<div class="alert-box" mdbModal #frame="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: false}"
+    (onHide)="onCloseWindow()">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading"> ONE ITEM HAS BEEN ADDED TO CART ! </p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-3">
+                        <p></p>
+                        <p class="text-center">
+                            <!-- <mdb-icon fas icon="shopping-cart" size="4x"></mdb-icon> -->
+                            <img [src]="product.imagePath" alt="" class="img-fluid">
+                        </p>
+                    </div>
+
+                    <div class="col-9">
+                        <h5>{{product.name}}</h5>
+                        <h5><strong> $ {{product.price}}</strong></h5>
+                        <p>Your product is waiting for you in the CART. Would you like to go to CART and Checkout OR to continue Shopping?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+
+                <a type="button" mdbBtn color="warning" outline="true" class="waves-effect" mdbWavesEffect
+                    (click)="frame.hide()" data-dismiss="modal">Continue Shopping</a>
+                <a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect (click)="frame.hide()"
+                    [routerLink]="['/cart']">View Cart & Checkout</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Added to Cart Message -->

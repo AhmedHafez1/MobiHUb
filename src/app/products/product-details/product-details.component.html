@@ -1,0 +1,232 @@
+<!-- <app-added-to-cart *ngIf="openWindow" (closeWindow)="onHandleClose()" [viewMessage]="openWindow" [product]="product">
+</app-added-to-cart> -->
+<div class="mt-4">
+    <h2>{{product.name}} &nbsp;<mdb-badge style="font-size: medium;" [success]="product.available"
+            [danger]="!product.available">{{product.available? 'In Stock' : 'Out of Stock'}}</mdb-badge>
+    </h2>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-5 col-sm-12 mt-4">
+
+        <mdb-card class="align-items-center mb-1" style="height: 559px;">
+            <!--Card image-->
+            <div class="view overlay waves-light">
+                <img class="img-fluid zoom hoverable" [src]="product.imagePath" [alt]="product.name"
+                    style="height: 480px;" />
+            </div>
+            <div style="width: 100%;">
+
+                <hr>
+                <div>
+                    <span class="ml-2 float-left mb-2">
+                        <a (click)="openModalRate(template)" placement="top" triggers="hover"
+                            ngbPopover="Rating: {{overallRating | number:'1.1-1'}} stars | Votes: {{product.rating.length}}"
+                            popoverTitle="{{product.name}} Rating">
+                            <ngb-rating [(rate)]="overallRating" [starTemplate]="t" [readonly]="true" [max]="5">
+                            </ngb-rating>
+                        </a>
+                        <span style="font-size: 1rem;"> ({{product.rating.length}})</span>
+                    </span>
+                </div>
+                <div class="float-right mt-3">
+                    <span style="font-size: large;">
+                        <a data-toggle="tooltip" data-placement="top"
+                            [title]="addedToCart? 'Added to Cart' : 'Add to Cart'"
+                            (click)="onAddToCart();openModal(templateCart)">
+                            <mdb-icon fas icon="shopping-cart" [ngStyle]="{'color': addedToCart? 'green': 'grey'}">
+                            </mdb-icon>
+                        </a>
+
+                        <a data-toggle="tooltip" data-placement="top"
+                            (click)="onAddToWishlist();openModal(templateWish)" class="mx-3"
+                            [title]="addedToWishing? 'Remove from Wishlist' : 'Add to Wishlist'">
+                            <mdb-icon fas icon="heart" [ngStyle]="{'color': addedToWishing? 'red': 'grey'}">
+                            </mdb-icon>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </mdb-card>
+    </div>
+
+    <div class="col-lg-7 col-sm-12 mt-4 mb-4">
+
+        <mdb-card cascade="true" narrower="true">
+            <!--Card image-->
+            <div class="gradient-card-header blue-gradient py-2 mx-4 text-center">
+
+                <h6 style="color: white;">Features</h6>
+
+            </div>
+            <!--/Card image-->
+
+            <div class="px-4">
+
+                <div class="table-wrapper">
+                    <!--Table-->
+                    <table class="mb-0" mdbTable>
+
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th class="thbold">
+                                    Manufacturer
+                                </th>
+                                <th>
+                                    {{product.brand}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+
+                        <!--Table body-->
+                        <tbody>
+                            <tr>
+                                <th class="thbold">Released</th>
+                                <th>{{product.released | date}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">OS</th>
+                                <th>{{product.oS}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Battery</th>
+                                <th>{{product.battery}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Display</th>
+                                <th>{{product.display}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Camera</th>
+                                <th>{{product.camera}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Storage</th>
+                                <th>{{product.storage}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Hardware</th>
+                                <th>{{product.hardware}}</th>
+                            </tr>
+                            <tr>
+                                <th class="thbold">Price</th>
+                                <th>
+                                    <p class="thbold" style="color: rgb(50, 22, 170); font-size: large;">
+                                        $ {{product.price}}
+                                    </p>
+
+                                </th>
+                            </tr>
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </mdb-card>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" style="margin-bottom: 25px;">
+        <mdb-card>
+
+            <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+                <h6 style="color: white;">Overview</h6>
+
+            </div>
+
+            <div class="px-4">
+                <p style="font-size: 1em;"> {{product.description}}</p>
+            </div>
+
+        </mdb-card>
+    </div>
+</div>
+<ng-template #t let-fill="fill">
+    <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+    </span>
+</ng-template>
+<!-- Rating Modal -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Your Rating!</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <ngb-rating class="star" [formControl]="rating" [rate]="rating" [readonly]="rating.valid" [max]="5"
+            style="color: goldenrod;"></ngb-rating>
+        <div class="form-text small">
+            <div *ngIf="rating.valid" class="text-success">Thanks for your Rating!</div>
+            <div *ngIf="rating.invalid" class="text-danger">Rate the Product</div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #templateWish>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">{{addedToWishing?'Added To WishList':'Removed from WishList'}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" [ngSwitch]="addedToWishing">
+        <div *ngSwitchCase="true"> {{product.name}} has been added to your wishlist.</div>
+        <div *ngSwitchCase="false"> {{product.name}} has been removed from your wishlist.</div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <div *ngIf="addedToWishing">
+            <a type="button" mdbBtn color="primary" outline="true" class="waves-effect" mdbWavesEffect
+                (click)="modalRef.hide()" data-dismiss="modal">Continue Shopping</a>
+            <a type="button" mdbBtn color="primary" class="waves-effect" mdbWavesEffect (click)="modalRef.hide()"
+                [routerLink]="['/wish-list']">View Your WishList</a>
+        </div>
+        <div *ngIf="!addedToWishing">
+            <a type="button" mdbBtn color="primary" class="waves-effect" mdbWavesEffect
+                (click)="modalRef.hide()" data-dismiss="modal">Close</a>
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #templateCart>
+    <div class="modal-header">
+        <h5 class="modal-title pull-left">ONE ITEM HAS BEEN ADDED TO CART !</h5>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-3">
+                <p></p>
+                <p class="text-center">
+                    <img [src]="product.imagePath" alt="" class="img-fluid">
+                </p>
+            </div>
+
+            <div class="col-9">
+                <h5>{{product.name}}</h5>
+                <h5><strong> $ {{product.price}}</strong></h5>
+                <p>Would you like to proceed to your cart and checkout or to continue Shopping?</p>
+            </div>
+        </div>
+    </div>
+
+    <!--Footer-->
+    <div class="modal-footer justify-content-center">
+
+        <a type="button" mdbBtn color="success" outline="true" class="waves-effect" mdbWavesEffect
+            (click)="modalRef.hide()" data-dismiss="modal">Continue Shopping</a>
+        <a type="button" mdbBtn color="success" class="waves-effect" mdbWavesEffect (click)="modalRef.hide()"
+            [routerLink]="['/cart']">View Cart & Checkout</a>
+    </div>
+</ng-template>

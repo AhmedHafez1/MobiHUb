@@ -1,0 +1,63 @@
+<div style="margin-bottom: 25px;">
+    <mdb-card cascade="true" narrower="true">
+        <!--Card header-->
+        <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+            <h6 style="color: white;">Shipping Information</h6>
+
+        </div>
+        <!--/Card header-->
+
+        <div class="row">
+            <div class="col-md-8 col-10 offset-md-2 offset-1">
+                <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="firstName" class="form-control" name="firstName"
+                            ngModel required #firstName="ngModel" />
+                        <label for="firstName">First Name</label>
+
+
+                    </div>
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="text" id="lastName" class="form-control" name="lastName"
+                            ngModel required #lastName="ngModel" />
+                        <label for="lastName">Last Name</label>
+
+                    </div>
+
+                    <div class="md-form">
+
+                        <input mdbInput mdbValidate type="email" id="email" class="form-control" name="email" ngModel
+                            required email #email="ngModel" />
+                        <label for="email">E-mail</label>
+                        <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                            Invalid email
+                        </mdb-error>
+                    </div>
+
+
+                    <div class="md-form">
+                        <input type="text" id="address" class="form-control" name="address" required mdbInput mdbValidate
+                            ngModel #address="ngModel">
+                        <label for="address">Address</label>
+                    </div>
+
+
+                    <div class="md-form">
+                        <input type="text" id="mobile" class="form-control" name="mobile" required mdbInput mdbValidate
+                            ngModel #mobile="ngModel">
+                        <label for="mobile">Phone Number</label>
+                    </div>
+
+                    <div style="margin-top: 40px; margin-bottom: 40px;">
+                        <button mdbBtn color="teal" mdbWavesEffect type="submit" class="m-0" [disabled]="!form.valid"
+                            style="width:100%;">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </mdb-card>
+</div>

@@ -1,0 +1,18 @@
+.thbold {
+  font-weight: bold;
+}
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: rgba(255, 174, 0, 0.534);
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color:  rgba(255, 174, 0, 0.534);
+}

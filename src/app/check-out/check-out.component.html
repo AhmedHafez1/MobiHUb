@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-5">
+        <app-order-summary></app-order-summary>
+    </div>
+    <div class="col-lg-7">
+<!-- Horizontal Steppers -->
+
+      <!-- Stepers Wrapper -->
+      <ul class="stepper stepper-horizontal">
+  
+        <!-- First Step -->
+        <li [ngClass]="{'completed':firstStepDone,'active':firstStepActive}">
+          <a [routerLink]="['/check-out/shipping']">
+            <span class="circle" *ngIf="!firstStepDone">1</span>
+            <span class="circle" *ngIf="firstStepDone"><mdb-icon fas icon="check"></mdb-icon></span>
+            <span class="label">Shipping Info</span>
+          
+          </a>
+        </li>
+  
+        <!-- Second Step -->
+        <li [ngClass]="{'completed':secondStepDone,'active':secondStepActive}">
+          <a (click)="goToSecondStep()">
+            <span class="circle" *ngIf="!secondStepDone">2</span>
+            <span class="circle" *ngIf="secondStepDone"><mdb-icon fas icon="check"></mdb-icon></span>
+            <span class="label">Payment</span>
+          </a>
+        </li>
+  
+        <!-- Third Step -->
+        <li [ngClass]="{'completed':thirdStepDone,'active':thirdStepActive}">
+          <a>
+            <span class="circle" *ngIf="!thirdStepDone">3</span>
+            <span class="circle" *ngIf="thirdStepDone"><mdb-icon fas icon="check"></mdb-icon></span>
+            <span class="label">Confirmation</span>
+          </a>
+        </li>
+  
+      </ul>
+      <!-- /.Stepers Wrapper -->
+  
+  <!-- /.Horizontal Steppers -->
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="spinner" *ngIf="isLoading">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!isLoading">
+  <br>
+  <h2 class="text-center h1">ALL PRODUCTS</h2>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex flex-wrap justify-content-center">
+        <div *ngFor="let product of productList; let i = index" style="width: 250px; margin-left: 10px;">
+          <app-product-item [product]="product" [id]="i"></app-product-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

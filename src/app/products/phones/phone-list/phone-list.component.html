@@ -1,0 +1,22 @@
+<div class="spinner" *ngIf="isLoading">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+<div *ngIf="!isLoading">
+  <br>
+  <h2 class=" text-center h1">CELL PHONES</h2>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex flex-wrap justify-content-center">
+        <div *ngFor="let phone of phoneList; let i = index">
+          <div *ngIf="phone.type === 'Phone'" style="max-width: 250px; margin-left: 10px;">
+            <app-product-item [product]="phone" [id]="i"></app-product-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

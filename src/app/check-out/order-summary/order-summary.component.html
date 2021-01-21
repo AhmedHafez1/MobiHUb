@@ -1,0 +1,90 @@
+<div style="margin-top: 25px; margin-bottom: 25px;">
+    <mdb-card cascade="true" narrower="true" style="background-color: rgba(234, 245, 250, 0.815);">
+        <!--Card header-->
+        <div class="gradient-card-header blue-gradient py-2 mx-4 mb-3 text-center">
+
+            <h6 style="color: white;">Order Summary</h6>
+
+        </div>
+        <!--/Card header-->
+
+        <div class="px-4">
+
+            <div class="table-wrapper">
+                <!--Table-->
+                <table class="table table-responsive-xs btn-table" mdbTable>
+
+                    <!--Table head-->
+                    <thead>
+                        <tr>
+                            <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                Product
+                            </th>
+                            <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                Name
+                            </th>
+                            <th style="color:rgb(19, 78, 146); font-weight: bold;">
+                                Price
+                            </th>
+                        </tr>
+                    </thead>
+                    <!--Table head-->
+
+                    <!--Table body-->
+                    <tbody>
+                        <tr *ngFor="let product of products; let i = index;">
+                            <td>
+                                <img [src]="product.imagePath" [alt]="product.name" style="height: 50px;" />
+                                <span class="counter badge badge-pill green"
+                                    style="color: white;">{{productQt[i]}}</span>
+                            </td>
+                            <td style="font-weight: bold;">
+                                {{product.name}}
+                            </td>
+                            <td style="font-weight: bold; font-size: large;">
+                                {{product.price * productQt[i] | number:'1.2'}}
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
+            </div>
+        </div>
+
+        <div class="px-4 text-center">
+            <h6>
+                <mdb-badge info="true" class="badge-2">Cart Price</mdb-badge>
+                <strong>
+                    <mdb-badge default="true" class="badge-1">$ {{this.cartPrice | number:'1.2'}}</mdb-badge>
+                </strong>
+            </h6>
+        </div>
+        <div class="px-4 text-center">
+            <h6>
+                <mdb-badge info="true" class="badge-2">Shipping Cost</mdb-badge>
+                <strong>
+                    <mdb-badge default="true" class="badge-1">$ {{this.shippingCost | number:'1.2'}}
+                    </mdb-badge>
+                </strong>
+            </h6>
+        </div>
+        <div class="px-4 text-center">
+            <h6>
+                <mdb-badge info="true" class="badge-2">Total Price</mdb-badge>
+                <strong>
+                    <mdb-badge warning="true" class="badge-1">$ {{this.totalPrice | number:'1.2'}}</mdb-badge>
+                </strong>
+            </h6>
+        </div>
+        <br>
+    </mdb-card>
+</div>
+
+<button mdbBtn color="mdb-color" mdbWavesEffect type="button" class="m-0" [routerLink]="['/cart']" style="width: 100%;">Edit Your Cart</button>
